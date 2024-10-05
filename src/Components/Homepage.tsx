@@ -119,8 +119,8 @@ const Homepage: React.FC = () => {
   const [animatedStats] = useState({ students: 574, parents: 1500, awards: 32 })
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-purple-700 text-white p-4 fixed w-full z-10">
+    <div className="flex flex-col  min-h-screen">
+      <header className="bg-purple-700  text-white p-4 fixed w-full z-10">
         <div className="container mx-auto flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold">
             eduzone
@@ -168,7 +168,7 @@ const Homepage: React.FC = () => {
             </div>
             <div className="md:w-1/2">
               <img
-                src="https://e7.pngegg.com/pngimages/378/297/png-clipart-cartoon-child-happy-students-people-toddler.png"
+                src="https://img.freepik.com/free-photo/cheerful-schoolchildren-with-blackboard-background_1098-3943.jpg"
                 alt="Happy students"
                 className="rounded-lg shadow-lg"
                 loading="lazy"
@@ -237,7 +237,7 @@ const Homepage: React.FC = () => {
         </section>
 
         {/* Why Choose Us Section */}
-        <section className="py-12 bg-gray-100">
+        <section className="py-12 bg-black-100">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">
               Why Choose Us
