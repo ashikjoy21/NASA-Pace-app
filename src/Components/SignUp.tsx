@@ -36,7 +36,7 @@ export default function SignUp() {
         await updateProfile(user, { displayName: name })
       }
 
-      navigate('/home', { state: { name } })
+      navigate('/category', { state: { name } })
     } catch (error: any) {
       setError(error.message)
     }
@@ -48,7 +48,7 @@ export default function SignUp() {
     try {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
-      navigate('/home', { state: { name: user.displayName || 'Guest' } })
+      navigate('/category')
     } catch (error: any) {
       console.error('Error signing up with Google: ', error)
       setError(error.message)
@@ -56,7 +56,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center p-4">
+    <div className="h-screen w-screen bg-[#6a1b9a] flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8 transition-all duration-300 ease-in-out transform hover:scale-105">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Sign Up</h1>
         <form onSubmit={handleSignUp} className="space-y-6">

@@ -1,402 +1,240 @@
-// Homepage.tsx
-import React, { useState, useEffect, Suspense, lazy } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 
-import {
-  
-  Menu,
-  X,
-  BookOpen,
-  Library,
-  Brain,
-  Route as RouteIcon
-} from 'lucide-react'
-import CountUp from 'react-countup'
-
-
-
-// Reusable Components
-
-type NavLinkProps = {
-  to: string
-  children: React.ReactNode
-}
-
-const NavLinkComponent: React.FC<NavLinkProps> = ({ to, children }) => (
-  <Link to={to} className="text-white hover:text-orange-400 transition-colors">
-    {children}
-  </Link>
-)
-
-type ButtonProps = {
-  children: React.ReactNode
-  variant?: 'primary' | 'secondary'
-  className?: string
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
-
-const Button: React.FC<ButtonProps> = ({
-  children,
-  variant = 'primary',
-  className = '',
-  ...props
-}) => (
-  <button
-    className={`px-6 py-2 rounded-full font-semibold transition-colors ${
-      variant === 'primary'
-        ? 'bg-orange-500 text-white hover:bg-orange-600'
-        : 'bg-transparent text-white border-2 border-white hover:bg-white hover:text-purple-700'
-    } ${className}`}
-    {...props}
-  >
-    {children}
-  </button>
-)
-
-type FeatureCardProps = {
-  icon: React.ReactNode
-  title: string
-  description: string
-}
-
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md text-center transition-transform hover:scale-105">
-    <div className="text-4xl text-purple-700 mb-4">{icon}</div>
-    <h3 className="text-xl font-semibold mb-2">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-)
-
-type StatItemProps = {
-  number: number
-  label: string
-}
-
-const StatItem: React.FC<StatItemProps> = ({ number, label }) => (
-  <div className="text-center">
-    <span className="block text-3xl font-bold text-purple-700">
-      <CountUp end={number} duration={2} />
-    </span>
-    <span className="text-gray-600">{label}</span>
-  </div>
-)
-
-type ProgramCardProps = {
-  image: string
-  tag: string
-  description: string
-}
-
-const ProgramCard: React.FC<ProgramCardProps> = ({ image, tag, description }) => (
-  <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform hover:scale-105">
-    <img
-      src={image}
-      alt={tag}
-      className="w-full h-48 object-cover"
-      loading="lazy"
-    />
-    <div className="p-6">
-      <span
-        className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2 ${
-          tag === 'Beginner'
-            ? 'bg-green-500 text-white'
-            : tag === 'Intermediate'
-            ? 'bg-orange-500 text-white'
-            : 'bg-red-500 text-white'
-        }`}
-      >
-        {tag}
-      </span>
-      <p className="text-gray-700">{description}</p>
-    </div>
-  </div>
-)
-
-// Placeholder Components for Routes
-const Homepage: React.FC = () => {
+const Homepage = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [animatedStats] = useState({ students: 574, parents: 1500, awards: 32 })
-
   return (
-    <div className="flex flex-col  min-h-screen">
-      <header className="bg-purple-700  text-white p-4 fixed w-full z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold">
-            eduzone
-          </Link>
-          <nav
-            className={`md:flex space-x-6 ${isMenuOpen ? 'block' : 'hidden'}`}
-          >
-            <NavLinkComponent to="/">Home</NavLinkComponent>
-            <NavLinkComponent to="/about">About</NavLinkComponent>
-            <NavLinkComponent to="/courses">Courses</NavLinkComponent>
-            <NavLinkComponent to="/pages">Pages</NavLinkComponent>
-            <NavLinkComponent to="/contact">Contact</NavLinkComponent>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Button variant="primary" className="hidden md:block">
-              Courses
-            </Button>
-            <button
-              aria-label="Toggle Menu"
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X /> : <Menu />}
-            </button>
+    <>
+    
+    <div className="overflow-x-hidden">
+  <meta charSet="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eduzone - Learn and Grow</title>
+  {/* <link rel="stylesheet" href="styles.css"> */}
+  <style
+    dangerouslySetInnerHTML={{
+      __html:
+        "\n        :root {\n            --primary-color: #6a1b9a;\n            --secondary-color: #4a148c;\n            --accent-color: #ff6d00;\n            --text-color: #333;\n            --light-bg: #f5f5f5;\n            --white: #ffffff;\n        }\n        \n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n        \n        body {\n            font-family: 'Arial', sans-serif;\n            line-height: 1.6;\n            color: var(--text-color);\n        }\n        \n        .container {\n            width: 90%;\n                  margin: 0 auto;\n            padding: 0 20px;\n            flex-direction: row;\n            display: flex;\n            gap: 2vw;\n        }\n        \n        /* Header Styles */\n        header {\n            background-color: var(--primary-color);\n            padding: 1rem 0;\n            position: fixed;\n            width: 100%;\n            z-index: 1000;\n        }\n        \n        nav {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n        }\n        \n        .logo {\n            color: var(--white);\n            font-size: 1.5rem;\n            font-weight: bold;\n            text-decoration: none;\n        }\n        \n        .nav-links {\n            display: flex;\n            list-style: none;\n        }\n        \n        .nav-links li {\n            margin-left: 1.5rem;\n        }\n        \n        .nav-links a {\n            color: var(--white);\n            text-decoration: none;\n            transition: color 0.3s ease;\n        }\n        \n        .nav-links a:hover, .nav-links a.active {\n            color: var(--accent-color);\n        }\n        \n        .btn {\n            padding: 0.5rem 1rem;\n            border: none;\n            border-radius: 5px;\n            cursor: pointer;\n            transition: background-color 0.3s ease;\n        }\n        \n        .btn-courses {\n            background-color: var(--accent-color);\n            color: var(--white);\n        }\n        \n        .btn-courses:hover {\n            background-color: #ff8f00;\n        }\n        \n        .mobile-menu-btn {\n            display: none;\n            background: none;\n            border: none;\n            cursor: pointer;\n        }\n        \n        .mobile-menu-btn span {\n            display: block;\n            width: 25px;\n            height: 3px;\n            background-color: var(--white);\n            margin: 5px 0;\n        }\n        \n        /* Hero Section Styles */\n        .hero {\n            background-color: var(--primary-color);\n            color: var(--white);\n            padding: 8rem 0 4rem;\n        }\n        \n        .hero-content {\n            }\n        \n        .hero h1 {\n            font-size: 3rem;\n            margin-bottom: 1rem;\n        }\n        \n        .hero p {\n            font-size: 1.2rem;\n            margin-bottom: 2rem;\n        }\n        \n        .cta-buttons {\n            display: flex;\n            gap: 1rem;\n        }\n        \n        .btn-primary {\n            background-color: var(--accent-color);\n            color: var(--white);\n        }\n        \n        .btn-secondary {\n            background-color: transparent;\n            color: var(--white);\n            border: 2px solid var(--white);\n        }\n        \n        .btn-primary:hover, .btn-secondary:hover {\n            opacity: 0.9;\n        }\n        \n        /* Features Section Styles */\n        .features {\n            background-color: var(--light-bg);\n            padding: 4rem 0;\n        }\n        \n        .feature-card {\n            background-color: var(--white);\n            padding: 2rem;\n            border-radius: 10px;\n            text-align: center;\n            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n            transition: transform 0.3s ease;\n        }\n        \n        .feature-card:hover {\n            transform: translateY(-5px);\n        }\n        \n        .feature-card i {\n            font-size: 3rem;\n            color: var(--primary-color);\n            margin-bottom: 1rem;\n        }\n        \n        /* About Section Styles */\n        .about {\n            padding: 4rem 0;\n        }\n        \n        .about-content {\n            display: flex;\n            align-items: center;\n            gap: 2rem;\n        }\n        \n        .about-image img {\n                   border-radius: 10px;\n        }\n        \n        .about-text h3 {\n            font-size: 2rem;\n            margin-bottom: 1rem;\n        }\n        \n        .stats {\n            display: flex;\n            justify-content: space-between;\n            margin-top: 2rem;\n        }\n        \n        .stat-item {\n            text-align: center;\n        }\n        \n        .stat-number {\n            font-size: 2rem;\n            font-weight: bold;\n            color: var(--primary-color);\n        }\n        \n        /* Why Choose Us Section Styles */\n        .why-choose-us {\n            background-color: var(--light-bg);\n            padding: 4rem 0;\n        }\n        \n        .choose-us-content {\n            display: flex;\n            align-items: center;\n            gap: 2rem;\n        }\n        \n        .choose-us-image {\n                border-radius: 10px;\n        }\n        \n        .choose-us-list {\n            list-style: none;\n            margin-top: 1rem;\n        }\n        \n        .choose-us-list li {\n            margin-bottom: 0.5rem;\n        }\n        \n        .choose-us-list i {\n            color: var(--primary-color);\n            margin-right: 0.5rem;\n        }\n        \n        .program-features {\n            display: flex;\n            justify-content: space-between;\n            margin-top: 3rem;\n        }\n        \n        .program-feature {\n            text-align: center;\n        }\n        \n        .program-feature i {\n            font-size: 2rem;\n            color: var(--primary-color);\n            margin-bottom: 1rem;\n        }\n        \n        /* Programs Section Styles */\n        .programs {\n            padding: 4rem 0;\n        }\n        \n        .program-cards {\n            display: flex;\n            gap: 2rem;\n            margin-bottom: 2rem;\n        }\n        \n        .program-card {\n            background-color: var(--white);\n            border-radius: 10px;\n            overflow: hidden;\n            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n        }\n        \n        .program-card img {\n            width: 100%;\n            height: 200px;\n            object-fit: cover;\n        }\n        \n        .program-card-content {\n            padding: 1.5rem;\n        }\n        \n        .program-tag {\n            display: inline-block;\n            padding: 0.3rem 0.8rem;\n            border-radius: 20px;\n            font-size: 0.8rem;\n            font-weight: bold;\n            margin-bottom: 0.5rem;\n        }\n        \n        .program-tag.english {\n            background-color: #ff6d00;\n            color: var(--white);\n        }\n        \n        .program-tag.drawing {\n            background-color: var(--primary-color);\n            color: var(--white);\n        }\n        \n        .program-tag.science {\n            background-color: #2196f3;\n            color: var(--white);\n        }\n        \n        /* Supporters Section Styles */\n        .supporters {\n            background-color: var(--light-bg);\n            padding: 4rem 0;\n        }\n        \n        .supporter-logos {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-top: 2rem;\n        }\n        \n        .supporter-logos img {\n              filter: grayscale(100%);\n            transition: filter 0.3s ease;\n        }\n        \n        .supporter-logos img:hover {\n            filter: grayscale(0%);\n        }\n        \n        /* Footer Styles */\n        footer {\n            background-color: var(--secondary-color);\n            color: var(--white);\n            padding: 4rem 0 2rem;\n        }\n        \n        .footer-content {\n            display: flex;\n            justify-content: space-between;\n            margin-bottom: 2rem;\n        }\n        \n        .footer-logo img {\n                   }\n        \n        .footer-info {\n            display: flex;\n            flex-direction: column;\n            gap: 1rem;\n        }\n        \n        .footer-info-item {\n            display: flex;\n            align-items: center;\n            gap: 0.5rem;\n        }\n        \n        .footer-links {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 2rem;\n        }\n        \n        .footer-links nav a {\n            color: var(--white);\n            text-decoration: none;\n            margin-right: 1rem;\n        }\n        \n        .social-links a {\n            color: var(--white);\n            font-size: 1.2rem;\n            margin-left: 1rem;\n        }\n        \n        .footer-bottom {\n            text-align: center;\n            padding-top: 2rem;\n            border-top: 1px solid rgba(255, 255, 255, 0.1);\n        }\n        \n        /* Responsive Design */\n        @media (max-width: 768px) {\n            .nav-links {\n                display: none;\n            }\n        \n            .mobile-menu-btn {\n                display: block;\n            }\n        \n            .hero-content, .about-content, .choose-us-content, .program-cards {\n                flex-direction: column;\n            }\n        \n            .about-image, .choose-us-image {\n                margin-bottom: 2rem;\n            }\n        \n            .program-features, .supporter-logos {\n                flex-wrap: wrap;\n                justify-content: center;\n                gap: 2rem;\n            }\n        \n            .footer-content, .footer-links {\n                flex-direction: column;\n                align-items: center;\n                text-align: center;\n            }\n        \n            .footer-info {\n                margin-top: 2rem;\n            }\n        \n            .footer-links nav {\n                margin-bottom: 1rem;\n            }\n        }\n        \n        .hero-image img{\n            width: 40vw;\n            border-radius: 65px;\n        }\n        .container-about{\n            width: 90%;\n                     margin: 0 auto;\n            padding: 0 20px;\n            flex-direction:column;\n            display: flex;\n            gap: 2vw;\n        } \n     "
+    }}
+  />
+  <header>
+    <nav className="container">
+      <a href="#" className="logo">
+        eduzone
+      </a>
+      <ul className="nav-links">
+        <li>
+          <a href="#home" className="active">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#about">About</a>
+        </li>
+        <li>
+          <a href="#courses">Courses</a>
+        </li>
+        <li>
+          <a href="#programs">Programs</a>
+        </li>
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+      <button className="btn btn-courses">Courses</button>
+      <button className="mobile-menu-btn">
+        <span />
+        <span />
+        <span />
+      </button>
+    </nav>
+  </header>
+  <main>
+    <section id="home" className="hero">
+      <div className="container">
+        <div className="hero-content ">
+          <h1>It's Time To Learn More</h1>
+          <p>
+            Empower your future with quality education. Join Eduzone and unlock
+            your potential today!
+          </p>
+          <div className="cta-buttons">
+            <button className="btn btn-primary" onClick={() => navigate('/login')}>Login</button>
+            <button className="btn btn-secondary" onClick={() => navigate('/signup')}>Signup</button>
           </div>
         </div>
-      </header>
-
-      <main className="flex-grow mt-16">
-        {/* Hero Section */}
-        <section className="bg-purple-700 text-white pt-24 pb-12">
-          <div className="container mx-auto flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                It's Time To Learn More
-              </h1>
-              <p className="mb-6 text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <div className="space-x-4">
-                <Button  onClick={() => navigate('/login')}>Login</Button>
-                <Button variant="secondary" onClick={() => navigate('/signup')}>Signup</Button>
-              </div>
-            </div>
-            <div className="md:w-1/2">
-              <img
-                src="https://img.freepik.com/free-photo/cheerful-schoolchildren-with-blackboard-background_1098-3943.jpg"
-                alt="Happy students"
-                className="rounded-lg shadow-lg"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="py-12 bg-gray-100">
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={<BookOpen />}
-              title="POPULAR COURSES"
-              description="Explore our wide range of in-demand courses tailored for success."
-            />
-            <FeatureCard
-              icon={<Library />}
-              title="MODERN LIBRARY"
-              description="Access our extensive collection of digital and physical resources."
-            />
-            <FeatureCard
-              icon={<Library />}
-              title="QUALIFIED TEACHER"
-              description="Learn from industry experts and experienced educators."
-            />
-          </div>
-        </section>
-
-        {/* About Us Section */}
-        <section className="py-12">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-8">About Us</h2>
-            <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/2 mb-8 md:mb-0">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104901-gOF2nyJnIkqbVUcxp9nFH89Nqjb09s.png"
-                  alt="About Us"
-                  className="rounded-lg shadow-lg"
-                  loading="lazy"
-                />
-              </div>
-              <div className="md:w-1/2 md:pl-8">
-                <h3 className="text-2xl font-bold mb-4">
-                  Learn About Our School Choose Wisely.
-                </h3>
-                <p className="mb-4">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <Button>Read more</Button>
-                <div className="flex justify-between mt-8">
-                  <StatItem
-                    number={animatedStats.students}
-                    label="Successful Students"
-                  />
-                  <StatItem
-                    number={animatedStats.parents}
-                    label="Happy Parents"
-                  />
-                  <StatItem number={animatedStats.awards} label="Awards Won" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Choose Us Section */}
-        <section className="py-12 bg-black-100">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">
-              Why Choose Us
-            </h2>
-            <h3 className="text-4xl font-bold text-center text-purple-700 mb-4">
-              A Better Future For Your Kids
-            </h3>
-            <p className="text-center mb-8">
-              Let the child be the director, and the actor in his own play
-            </p>
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104830-TlPoHuR45IMaa9o1ap1diLy87fFns7.png"
-                alt="Happy kid"
-                className="rounded-full shadow-lg mb-8 md:mb-0"
-                width={200}
-                height={200}
-                loading="lazy"
-              />
-              <div className="text-center md:text-left md:w-1/3">
-                <Button className="mb-4">Get Started</Button>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <div className="mt-4">
-                  <div className="flex items-center mb-2">
-                    <Brain className="mr-2 text-purple-700" />
-                    <span>
-                      6.8k+ Total active students are taking gifted courses
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <BookOpen className="mr-2 text-purple-700" />
-                    <span>50+ Available field programs and Increasing.</span>
-                  </div>
-                </div>
-              </div>
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104830-TlPoHuR45IMaa9o1ap1diLy87fFns7.png"
-                alt="Happy kid"
-                className="rounded-full shadow-lg mt-8 md:mt-0"
-                width={200}
-                height={200}
-                loading="lazy"
-              />
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-              {[
-                { icon: <Brain />, title: 'Creative Thinking' },
-                { icon: <RouteIcon />, title: 'Career Planning' },
-                { icon: <RouteIcon />, title: 'Public Speaking' },
-                { icon: <RouteIcon />, title: 'Extra Activity' },
-              ].map((item, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-4xl text-purple-700 mb-4">
-                    {item.icon}
-                  </div>
-                  <h4 className="font-semibold mb-2">{item.title}</h4>
-                  <Link to="#" className="text-purple-700 hover:underline">
-                    Learn more
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Our Program Section */}
-        <section className="py-12">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">
-              Our Program
-            </h2>
-            <h3 className="text-4xl font-bold text-center mb-8">
-              Our Classes, Events & Programs
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <ProgramCard
-                image="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104912-3LEercfBbopy4ZRHaJpRoiOrZvrhax.png"
-                tag="Beginner"
-                description="Start your learning journey with our comprehensive beginner courses."
-              />
-              <ProgramCard
-                image="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104912-3LEercfBbopy4ZRHaJpRoiOrZvrhax.png"
-                tag="Intermediate"
-                description="Take your skills to the next level with our intermediate programs."
-              />
-              <ProgramCard
-                image="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104912-3LEercfBbopy4ZRHaJpRoiOrZvrhax.png"
-                tag="Advanced"
-                description="Master complex topics and become an expert in your field."
-              />
-            </div>
-            <div className="text-center">
-              <Button>More Courses</Button>
-            </div>
-          </div>
-        </section>
-        <footer className="bg-purple-800 text-white py-8">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-              <div className="mb-4 md:mb-0">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104927-2Hytn3ayZ3Jubc1IW6xd0YvhQzhSQ2.png" alt="Eduzone Logo" width={150} height={50} />
-              </div>
-              <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-                <div className="flex items-center space-x-2">
-                  <i className="fas fa-map-marker-alt" />
-                  <span>1234, Parkstreet Avenue, NewYork, America</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <i className="fas fa-phone-alt" />
-                  <span>(+880) 1234 567 890</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <i className="fas fa-envelope" />
-                  <span>shikkhaloy@gmail.com</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              {/* <nav className="flex space-x-4 mb-4 md:mb-0">
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/terms">Terms & Conditions</NavLink>
-                <NavLink to="/faq">FAQ's</NavLink>
-                <NavLink to="/privacy">Privacy Policy</NavLink>
-                <NavLink to="/contact">Contact</NavLink>
-              </nav> */}
-              {/* <div className="flex space-x-4">
-                <a href="#" className="text-white hover:text-orange-400 transition-colors">
-                  <span className="sr-only">Facebook</span>
-                  <Facebook className="h-6 w-6" />
-                </a>
-                <a href="#" className="text-white hover:text-orange-400 transition-colors">
-                  <span className="sr-only">Instagram</span>
-                  <Instagram className="h-6 w-6" />
-                </a>
-                <a href="#" className="text-white hover:text-orange-400 transition-colors">
-                  <span className="sr-only">Twitter</span>
-                  <Twitter className="h-6 w-6" />
-                </a>
-                <a href="#" className="text-white hover:text-orange-400 transition-colors">
-                  <span className="sr-only">LinkedIn</span>
-                  <Linkedin className="h-6 w-6" />
-                </a> */}
-              {/* </div> */}
-            </div>
-            <div className="mt-8 text-center text-sm">
-              <p>&copy; 2020-21, All Right Reserved | Designed by Sigma Design</p>
-            </div>
-          </div>
-        </footer>
-      </main>
-
-      
-
+        <div className="hero-image">
+          
+          <img
+            src="https://www.pandasecurity.com/en/mediacenter/src/uploads/2016/07/schoolchildren-using-mobile-phone-at-classroom.jpg"
+            alt="Happy students"
+          />
+        </div>
       </div>
+    </section>
+    <section id="features" className="features">
+      <div className="container">
+        <div className="feature-card">
+          <i className="fas fa-book-open" />
+          <h3>Popular Courses</h3>
+          <p>Explore our wide range of in-demand courses.</p>
+        </div>
+        <div className="feature-card">
+          <i className="fas fa-library" />
+          <h3>Modern Library</h3>
+          <p>Access our extensive digital and physical library.</p>
+        </div>
+        <div className="feature-card">
+          <i className="fas fa-chalkboard-teacher" />
+          <h3>Qualified Teachers</h3>
+          <p>Learn from industry experts and experienced educators.</p>
+        </div>
+      </div>
+    </section>
+    <section id="about" className="about">
+      <div className="container-about">
+        <h2>About Us</h2>
+        <div className="about-content">
+          <div className="about-image">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104901-gOF2nyJnIkqbVUcxp9nFH89Nqjb09s.png"
+              alt="Students learning"
+            />
+          </div>
+          <div className="about-text">
+            <h3>Learn About Our School - Choose Wisely</h3>
+            <p>
+              At Eduzone, we believe in nurturing talent and fostering a love
+              for learning. Our innovative approach to education ensures that
+              every student receives personalized attention and guidance.
+            </p>
+            <button className="btn btn-primary">Read More</button>
+            {/* <div class="stats">
+                      <div class="stat-item">
+                          <span class="stat-number">574</span>
+                          <span class="stat-label">Successful Students</span>
+                      </div>
+                      <div class="stat-item">
+                          <span class="stat-number">1.5k</span>
+                          <span class="stat-label">Happy Parents</span>
+                      </div>
+                      <div class="stat-item">
+                          <span class="stat-number">32</span>
+                          <span class="stat-label">Awards Won</span>
+                      </div>
+                  </div> */}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="why-choose-us" className="why-choose-us">
+      <div className="container-about">
+        <h2>Why Choose Us</h2>
+        <h3>A Better Future For Your Kids</h3>
+        <p>Let the child be the director, and the actor in their own play</p>
+        <div className="choose-us-content">
+          
+          <div className="choose-us-text">
+            <button className="btn btn-primary">Get Started</button>
+            <p>
+              Our innovative programs are designed to bring out the best in
+              every child. We focus on holistic development, combining academic
+              excellence with character building.
+            </p>
+            <ul className="choose-us-list">
+              <li>
+                <i className="fas fa-user-graduate" /> 6.8k+ active students
+                taking gifted courses
+              </li>
+              <li>
+                <i className="fas fa-book" /> 50+ available field programs and
+                growing
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="program-features">
+          <div className="program-feature">
+            <i className="fas fa-brain" />
+            <h4>Creative Thinking</h4>
+            <a href="#">Learn more</a>
+          </div>
+          <div className="program-feature">
+            <i className="fas fa-route" />
+            <h4>Career Planning</h4>
+            <a href="#">Learn more</a>
+          </div>
+          <div className="program-feature">
+            <i className="fas fa-microphone-alt" />
+            <h4>Public Speaking</h4>
+            <a href="#">Learn more</a>
+          </div>
+          <div className="program-feature">
+            <i className="fas fa-running" />
+            <h4>Extra Activities</h4>
+            <a href="#">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="programs" className="programs">
+      <div className="container-about">
+        <h2>Our Programs</h2>
+        <h3>Our Classes, Events &amp; Programs</h3>
+        <div className="program-cards">
+          <div className="program-card">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104912-3LEercfBbopy4ZRHaJpRoiOrZvrhax.png"
+              alt="English Class"
+            />
+            <div className="program-card-content">
+              <span className="program-tag english">Beginer</span>
+              <p>
+                Develop strong language skills through our comprehensive English
+                program.
+              </p>
+            </div>
+          </div>
+          <div className="program-card">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104912-3LEercfBbopy4ZRHaJpRoiOrZvrhax.png"
+              alt="Drawing Class"
+            />
+            <div className="program-card-content">
+              <span className="program-tag drawing">Intermediate</span>
+              <p>
+                Unleash creativity and artistic talent in our engaging drawing
+                classes.
+              </p>
+            </div>
+          </div>
+          <div className="program-card">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104912-3LEercfBbopy4ZRHaJpRoiOrZvrhax.png"
+              alt="Science Class"
+            />
+            <div className="program-card-content">
+              <span className="program-tag science">Advance</span>
+              <p>
+                Explore the wonders of science through hands-on experiments and
+                projects.
+              </p>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </section>
     
-  )
-}
+  </main>
+  <footer >
+      <div className="footer-bottom">
+        <p>© 2020-21, All Rights Reserved | Designed by Sigma Design</p>
+      </div>
+  </footer>
+  </div>
+</>
 
-export default Homepage
+  );
+};
+
+export default Homepage;
