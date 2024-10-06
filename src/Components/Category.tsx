@@ -28,7 +28,7 @@ const Category: React.FC = () => {
     setShowAlert(true)
 
     // Navigate to a new route based on the selected level
-    navigate('/next-page', { state: { level } }) // Change '/next-page' to your desired route
+    navigate('/expert/expertpage', { state: { level } }) // Change '/next-page' to your desired route
   }
 
   return (
