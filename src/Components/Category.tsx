@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
-const skillLevels = ['Beginner', 'Intermediate', 'Advanced']
-
 const Category: React.FC = () => {
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(null)
+  const [selectedButton, setSelectedButton] = useState<string | null>(null)
   const [showAlert, setShowAlert] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const navigate = useNavigate() // Hook for navigation
@@ -22,44 +20,41 @@ const Category: React.FC = () => {
     }
   }, [showAlert])
 
-  const handleLevelSelect = (level: string) => {
-    setSelectedLevel(level)
-    setAlertMessage(`You've selected the ${level} level!`)
+  const handleButtonClick = (button: string, route: string) => {
+    setSelectedButton(button)
+    setAlertMessage(`Navigating to ${button} page!`)
     setShowAlert(true)
 
-    // Navigate to a new route based on the selected level
-    navigate('/expert/expertpage', { state: { level } }) // Change '/next-page' to your desired route
+    // Navigate to the respective page
+    navigate(route, { state: { button } })
   }
 
   return (
     <div className="h-screen w-screen bg-[#6a1b9a] flex justify-center items-center">
       <div className="bg-white shadow-2xl rounded-lg overflow-hidden w-full max-w-md p-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Select Your Skill Level</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">Choose Your Level</h1>
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {skillLevels.map((level) => (
-            <motion.button
-              key={level}
-              onClick={() => handleLevelSelect(level)}
-              aria-label={`Select ${level} level`}
-              className={`py-4 px-8 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 ease-in-out shadow-md relative overflow-hidden
-                ${level === 'Beginner' ? 'bg-[#4CAF50]' : ''} 
-                ${level === 'Intermediate' ? 'bg-[#2196F3]' : ''} 
-                ${level === 'Advanced' ? 'bg-[#F44336]' : ''} 
-                ${selectedLevel === level ? 'animate-pulse' : ''}`}
-              whileHover={{ y: -3, boxShadow: '0 6px 8px rgba(0, 0, 0, 0.15)' }}
-              whileTap={{ y: -1, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15)' }}
-            >
-              {level}
-              <motion.div
-                className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.6 }}
-              />
-            </motion.button>
-          ))}
+          <motion.button
+            onClick={() => handleButtonClick('First Option', '/beginner/beginpage')}
+            aria-label="Select First Option"
+            className={`py-4 px-8 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 ease-in-out shadow-md
+              bg-[#4CAF50] ${selectedButton === 'First Option' ? 'animate-pulse' : ''}`}
+            
+          >
+            Beginner
+          </motion.button>
+
+          <motion.button
+            onClick={() => handleButtonClick('Second Option', '/intermediate/interpage')}
+            aria-label="Select Second Option"
+            className={`py-4 px-8 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 ease-in-out shadow-md
+              bg-[#2196F3] ${selectedButton === 'Second Option' ? 'animate-pulse' : ''}`}
+           
+          >
+            Intermediate
+          </motion.button>
         </div>
         {showAlert && (
           <motion.div

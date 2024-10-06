@@ -472,8 +472,10 @@ export default function ExpertPage() {
 
       {/* Right side - Chatbot (Fixed) */}
       <div className="w-1/3 h-screen p-4 flex flex-col">
+      <h2>PACE ChatBot</h2>
       <Card className="flex flex-col h-full">
         <CardHeader>
+          
           <CardTitle>PACE Chatbot</CardTitle>
           <CardDescription>Ask questions about PACE</CardDescription>
         </CardHeader>

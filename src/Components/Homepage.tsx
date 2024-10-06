@@ -144,7 +144,7 @@ const Homepage = () => {
   </main>
   <footer >
       <div className="footer-bottom">
-        <p>© 2020-21, All Rights Reserved | Designed by Sigma Design</p>
+        <p>©2024, All Rights Reserved | Designed and Developed by Snowden</p>
       </div>
   </footer>
   </div>

@@ -6,6 +6,7 @@ import SignUp from './Components/SignUp';
 import Category from './Components/Category';
 import Quiz from './Components/Beginner/Quiz';
 import ExpertPage from './Components/Expert/ExpertPage';
+import BeginPage from './Components/Beginner/BeginPage';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/category" element={<Category />} />
         <Route path="/beginner/quiz" element={<Quiz />} />
-        <Route path="/expert/expertpage" element={<ExpertPage />} />
+        <Route path="/beginner/beginpage" element={<BeginPage />} />
+        <Route path="/intermediate/interpage" element={<ExpertPage />} />
       </Routes>
     </Router>
   );
