@@ -471,37 +471,43 @@ export default function ExpertPage() {
       </div>
 
       {/* Right side - Chatbot (Fixed) */}
-      <div className="w-1/3 p-4 flex flex-col">
-        <Card className="flex-grow flex flex-col">
-          <CardHeader>
-            <CardTitle><div className='text-black'>PACE Chatbot</div></CardTitle>
-            <CardDescription>Ask questions about PACE</CardDescription>
-          </CardHeader>
-          <CardContent >
-            <div className="h-[400px] mb-4 p-4 border rounded ">
-              {chatHistory.map((message, index) => (
-                <div key={index} className={`mb-2 p-2 rounded ${message.role === 'user' ? 'bg-blue-500 text-right' : 'bg-gray-500'}`} style={{ maxWidth: '70%', marginLeft: message.role === 'user' ? 'auto' : '0' }}>
-                  <p className="font-bold">{message.role === 'user' ? 'You:' : 'Assistant:'}</p>
-                  <p>{message.content}</p>
-                </div>
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
-            <form onSubmit={handleSubmit} className="flex space-x-2">
-              <Input
-                type="text"
-                value={question}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
-                placeholder="Enter your question"
-                className="flex-grow"
-              />
-              <Button type="submit" disabled={isLoading}>
-                {isLoading ? 'Loading...' : 'Ask'}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
+      <div className="w-1/3 h-screen p-4 flex flex-col">
+      <Card className="flex flex-col h-full">
+        <CardHeader>
+          <CardTitle>PACE Chatbot</CardTitle>
+          <CardDescription>Ask questions about PACE</CardDescription>
+        </CardHeader>
+        <CardContent >
+          <div className="h-[500px] mb-4 p-4 border rounded">
+            {chatHistory.map((message, index) => (
+              <div
+                key={index}
+                className={`mb-2 p-2 rounded ${
+                  message.role === 'user' ? 'bg-blue-500 text-white ml-auto' : 'bg-gray-500'
+                } max-w-[70%]`}
+              >
+                <p className="font-bold">{message.role === 'user' ? 'You:' : 'Assistant:'}</p>
+                <p>{message.content}</p>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+          <form onSubmit={handleSubmit} className="flex space-x-2">
+            <Input
+              type="text"
+              value={question}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
+              placeholder="Enter your question"
+              className="flex-grow"
+            />
+            <Button type="submit" disabled={isLoading}>
+              {isLoading ? 'Loading...' : 'Ask'}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+
     </div>
   )
 }
