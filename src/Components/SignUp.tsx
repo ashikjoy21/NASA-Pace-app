@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 // @ts-ignore
 import { auth } from '../FirebaseConfig'
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, updateProfile } from 'firebase/auth'
+import { User } from 'firebase/auth'
 
 export default function SignUp() {
   const [name, setName] = useState('')
@@ -47,8 +48,10 @@ export default function SignUp() {
     const provider = new GoogleAuthProvider()
     try {
       const result = await signInWithPopup(auth, provider)
-      const user = result.user
-      navigate('/category')
+      const user: User | null = result.user // Use 'User' type from Firebase
+      if (user) {
+        navigate('/category')
+      }
     } catch (error: any) {
       console.error('Error signing up with Google: ', error)
       setError(error.message)

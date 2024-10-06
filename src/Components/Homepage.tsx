@@ -19,7 +19,7 @@ const Homepage = () => {
   <header>
     <nav className="container">
       <a href="#" className="logo">
-        eduzone
+        PACEedu
       </a>
       <ul className="nav-links">
         <li>
@@ -31,16 +31,10 @@ const Homepage = () => {
           <a href="#about">About</a>
         </li>
         <li>
-          <a href="#courses">Courses</a>
-        </li>
-        <li>
-          <a href="#programs">Programs</a>
-        </li>
-        <li>
           <a href="#contact">Contact</a>
         </li>
       </ul>
-      <button className="btn btn-courses">Courses</button>
+      <button className="btn btn-courses">Programs</button>
       <button className="mobile-menu-btn">
         <span />
         <span />
@@ -52,10 +46,9 @@ const Homepage = () => {
     <section id="home" className="hero">
       <div className="container">
         <div className="hero-content ">
-          <h1>It's Time To Learn More</h1>
+          <h1>Explore the Universe with <br/>PACE Satellite</h1>
           <p>
-            Empower your future with quality education. Join Eduzone and unlock
-            your potential today!
+          Unleash your curiosity with the PACE Satellite Hub—an interactive,<br/> expert-led platform that makes learning about satellite technology and <br/> space exploration fun and engaging for students!
           </p>
           <div className="cta-buttons">
             <button className="btn btn-primary" onClick={() => navigate('/login')}>Login</button>
@@ -72,114 +65,37 @@ const Homepage = () => {
       </div>
     </section>
     <section id="features" className="features">
+        <div className='flex flex-row justify-center'>
+          <div className="feature-card w-[1000px]">
+            <i className="fas fa-book-open" />
+            <h3><b>About Us</b></h3>
+            <p>An interactive website titled "Explore the Universe with PACE ( Plankton, Aerosol, Cloud, Ocean Ecosystem ): A Classroom Exploration," which features an inbuilt chatbot designed to assist teachers and students about the PACE satellite and its data. The PACE mission, launched by NASA, aims to study the interactions between the ocean, atmosphere, and climate by observing ocean color and atmospheric components like aerosols and clouds.</p>
+          </div>
+        </div>
+        <br/>
+        <br/>
       <div className="container">
         <div className="feature-card">
           <i className="fas fa-book-open" />
-          <h3>Popular Courses</h3>
-          <p>Explore our wide range of in-demand courses.</p>
+          <h3><b>Explore from Space!</b></h3>
+          <p>Discover how the PACE satellite observes Earth’s oceans and atmosphere from above</p>
         </div>
         <div className="feature-card">
           <i className="fas fa-library" />
-          <h3>Modern Library</h3>
-          <p>Access our extensive digital and physical library.</p>
+          <h3><b>Engaging Learning Tools!</b></h3>
+          <p>Access interactive games and tools that make learning about satellite data fun</p>
         </div>
         <div className="feature-card">
           <i className="fas fa-chalkboard-teacher" />
-          <h3>Qualified Teachers</h3>
-          <p>Learn from industry experts and experienced educators.</p>
-        </div>
-      </div>
-    </section>
-    <section id="about" className="about">
-      <div className="container-about">
-        <h2>About Us</h2>
-        <div className="about-content">
-          <div className="about-image">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-10-05%20104901-gOF2nyJnIkqbVUcxp9nFH89Nqjb09s.png"
-              alt="Students learning"
-            />
-          </div>
-          <div className="about-text">
-            <h3>Learn About Our School - Choose Wisely</h3>
-            <p>
-              At Eduzone, we believe in nurturing talent and fostering a love
-              for learning. Our innovative approach to education ensures that
-              every student receives personalized attention and guidance.
-            </p>
-            <button className="btn btn-primary">Read More</button>
-            {/* <div class="stats">
-                      <div class="stat-item">
-                          <span class="stat-number">574</span>
-                          <span class="stat-label">Successful Students</span>
-                      </div>
-                      <div class="stat-item">
-                          <span class="stat-number">1.5k</span>
-                          <span class="stat-label">Happy Parents</span>
-                      </div>
-                      <div class="stat-item">
-                          <span class="stat-number">32</span>
-                          <span class="stat-label">Awards Won</span>
-                      </div>
-                  </div> */}
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="why-choose-us" className="why-choose-us">
-      <div className="container-about">
-        <h2>Why Choose Us</h2>
-        <h3>A Better Future For Your Kids</h3>
-        <p>Let the child be the director, and the actor in their own play</p>
-        <div className="choose-us-content">
-          
-          <div className="choose-us-text">
-            <button className="btn btn-primary">Get Started</button>
-            <p>
-              Our innovative programs are designed to bring out the best in
-              every child. We focus on holistic development, combining academic
-              excellence with character building.
-            </p>
-            <ul className="choose-us-list">
-              <li>
-                <i className="fas fa-user-graduate" /> 6.8k+ active students
-                taking gifted courses
-              </li>
-              <li>
-                <i className="fas fa-book" /> 50+ available field programs and
-                growing
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="program-features">
-          <div className="program-feature">
-            <i className="fas fa-brain" />
-            <h4>Creative Thinking</h4>
-            <a href="#">Learn more</a>
-          </div>
-          <div className="program-feature">
-            <i className="fas fa-route" />
-            <h4>Career Planning</h4>
-            <a href="#">Learn more</a>
-          </div>
-          <div className="program-feature">
-            <i className="fas fa-microphone-alt" />
-            <h4>Public Speaking</h4>
-            <a href="#">Learn more</a>
-          </div>
-          <div className="program-feature">
-            <i className="fas fa-running" />
-            <h4>Extra Activities</h4>
-            <a href="#">Learn more</a>
-          </div>
+          <h3><b>Empower Future Scientists!</b></h3>
+          <p>Join citizen science projects and contribute to important environmental research.</p>
         </div>
       </div>
     </section>
     <section id="programs" className="programs">
       <div className="container-about">
-        <h2>Our Programs</h2>
-        <h3>Our Classes, Events &amp; Programs</h3>
+      <h2 className='text-white font-bold text-3xl'>Our Programs</h2>
+        <h3 className='text-white'> The website is structured into three levels — Beginner, Intermediate, and Advanced ; catering to different age groups and learning stages</h3>
         <div className="program-cards">
           <div className="program-card">
             <img
