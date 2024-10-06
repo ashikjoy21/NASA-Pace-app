@@ -226,7 +226,7 @@ export default function ExpertPage() {
     const userMessage: ChatMessage = { role: 'user', content: question }
     setChatHistory(prev => [...prev, userMessage])
     try {
-      const response = await fetch('http://localhost:5000/ask', {
+      const response = await fetch('https://backend-s89f.onrender.com/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
