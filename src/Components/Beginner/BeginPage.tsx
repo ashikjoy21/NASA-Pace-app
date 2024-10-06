@@ -111,7 +111,7 @@ const characters = [
 
 const storyPages = [
   {
-    content: "Once upon a time, in a world much like ours, there were four special friends who worked together to keep the Earth healthy and happy.",
+    content: "In a vibrant world, Planty the plankton and Aero the aerosol teamed up as the Guardians of the Ocean and Sky. Planty produced oxygen while Aero created clouds, both essential for life on Earth. Together, they kept the environment balanced and healthy. With their friendship, they inspired everyone to protect the planet, ensuring a bright future for all.",
     image: slide1,
     interactiveElements: [
       { type: 'clickable', x: 50, y: 50, width: 50, height: 50, action: 'showInfo', info: 'This is our beautiful Earth!' },
@@ -119,7 +119,7 @@ const storyPages = [
     ],
   },
   {
-    content: "First, we have Planty the Plankton. Planty lives in the ocean and helps make oxygen for all living things to breathe.",
+    content: "Planty was the smallest of all his friends, floating deep in the ocean with his plankton family. Even though he was tiny, Planty had a big job! Hey, kids! Did you know I help make the air you breathe? I create oxygen with sunlight! Wow, Planty! You’re like a tiny superhero! the children exclaimed. That’s right! Planty laughed.",
     image: slide2,
     interactiveElements: [
       { type: 'clickable', x: 100, y: 100, width: 40, height: 40, action: 'playAnimation', animation: 'plantySwim' },
@@ -127,7 +127,7 @@ const storyPages = [
     ],
   },
   {
-    content: "Next, we meet Aero the Aerosol. Aero floats high in the sky, helping to form clouds by giving water droplets something to cling to.",
+    content: "Next, we meet Aero, a tiny aerosol floating high in the sky. He could be made of dust, salt, or even tiny water droplets. Hi, everyone! Aero said with a spin. I help make clouds! When lots of aerosols like me gather, we give water droplets something to stick to, forming clouds. So every time you see clouds, tiny aerosols like me are at work! Aero smiled. I also help keep the air balanced. Even though I'm small, I have a big job!",
     image: slide3,
     interactiveElements: [
       { type: 'clickable', x: 150, y: 50, width: 40, height: 40, action: 'playAnimation', animation: 'aeroFloat' },
@@ -135,7 +135,7 @@ const storyPages = [
     ],
   },
   {
-    content: "Then there's Clo the Cloud. Clo travels across the sky, bringing rain to thirsty plants and animals.",
+    content: "As the friends continued their adventure, they saw Clo, the friendly cloud. Hello, little ones! Clo called. I help keep Earth cool by reflecting sunlight. Thanks for the shade, Clo! the children said. But what else do clouds do? I bring rain! Clo explained. My raindrops water plants and fill rivers. We love the rain! the children giggled.",
     image: slide4,
     interactiveElements: [
       { type: 'clickable', x: 200, y: 75, width: 60, height: 40, action: 'playAnimation', animation: 'cloRain' },
@@ -143,7 +143,7 @@ const storyPages = [
     ],
   },
   {
-    content: "Finally, we have Ocy the Ocean. Ocy covers most of the Earth and helps control the planet's temperature.",
+    content: "Finally, the friends reached Ocy, the vast ocean. With calm waves, Ocy greeted them. Hi, kids! I’m Ocy, and I have a big job. I cover most of Earth, controlling the weather, climate, and your food! Wow, Ocy! How do you do that? the children asked. I absorb heat and carbon dioxide, and I’m home to many creatures, Ocy explained. That's why we must protect the ocean!",
     image: slide5,
     interactiveElements: [
       { type: 'clickable', x: 50, y: 150, width: 80, height: 60, action: 'playAnimation', animation: 'ocyWave' },
